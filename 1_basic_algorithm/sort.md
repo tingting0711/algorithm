@@ -34,7 +34,7 @@
 |  冒泡排序  |   O(N<sup>2</sup>)   |   O(N<sup>2</sup>)   | O(N) ~O(N<sup>2</sup>) |    O(1)    |  稳定  |
 | 堆  排  序 | O(Nlog<sub>2</sub>N) | O(Nlog<sub>2</sub>N) |  O(Nlog<sub>2</sub>N)  |    O(1)    | 不稳定 |
 |  归并排序  | O(Nlog<sub>2</sub>N) | O(Nlog<sub>2</sub>N) |  O(Nlog<sub>2</sub>N)  |     X      |  稳定  |
-|  快速排序  | O(Nlog<sub>2</sub>N) |   O(N<sup>2</sup>)   |  O(Nlog<sub>2</sub>N)  |    O(1)    |  稳定  |
+|  快速排序  | O(Nlog<sub>2</sub>N) |   O(N<sup>2</sup>)   |  O(Nlog<sub>2</sub>N)  |    O(1)    | 不稳定 |
 | 桶  排  序 |       O(N + k)       |       O(N + k)       |        O(N + k)        |  O(N + k)  |        |
 |  计数排序  |       O(N + k)       |       O(N + k)       |        O(N + k)        |  O(N + k)  |  稳定  |
 |  基数排序  |       O(N + k)       |       O(N + k)       |        O(N + k)        |  O(N + k)  |        |
