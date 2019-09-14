@@ -29,9 +29,113 @@
 
 */
 
+/*
+	二维数组
+	space:O(N^2)
+	time:O(N^2)
+
+*/
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+const int N = 1010;
+int n, m;
+int f[N][N];
+int v[N], w[N];
+
+int main()
+{
+    scanf("%d%d", &n, &m);
+    for(int i = 1; i <= n; i++)
+    {
+        scanf("%d%d", &v[i], &w[i]);
+    }
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 0; j <= m; j++)
+        {
+            f[i][j] = f[i - 1][j];
+            if(j >= v[i])f[i][j] = max(f[i][j], f[i - 1][j - v[i]] + w[i]);
+        }
+    }
+    printf("%d\n", f[n][m]);
+    return 0;
+}
+
+/*
+	二维滚动数组	
+	space:O(N)
+	time:O(N^2)
+*/
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+const int N = 1010;
+int n, m;
+int f[2][N];
+int v[N], w[N];
+
+int main()
+{
+    scanf("%d%d", &n, &m);
+    for(int i = 1; i <= n; i++)
+    {
+        scanf("%d%d", &v[i], &w[i]);
+    }
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 0; j <= m; j++)
+        {
+            f[i & 1][j] = f[i - 1 & 1][j];
+            if(j >= v[i])f[i & 1][j] = max(f[i & 1][j], f[i - 1 & 1][j - v[i]] + w[i]);
+        }
+    }
+    int res = 0;
+    // for(int i = 0; i <= m; i++)cout<<f[n][i]<<" ", res = max(res, f[n][i]);
+    printf("%d\n", f[n & 1][m]);
+    return 0;
+}
 
 
 /*
-time : 
-space : 
+	一维数组	
+	space:O(N)
+	time:O(N^2)
 */
+
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+const int N = 1010;
+int n, m;
+int f[N];
+int v[N], w[N];
+
+int main()
+{
+    scanf("%d%d", &n, &m);
+    for(int i = 1; i <= n; i++)
+    {
+        scanf("%d%d", &v[i], &w[i]);
+    }
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = m; j >= v[i]; j--)
+        {
+            f[j] = max(f[j], f[j - v[i]] + w[i]);
+        }
+    }
+    printf("%d\n", f[m]);
+    return 0;
+}
+
+
+/*
+状态数组的初始化极为重要，若状态数组初始化全为0，则f[m]为答案：f[m]表示体积 j<= m的情况下的最优解
+                      若状态数组初始化为负无穷，则需要枚举所有最后一层的所有状态：f[m]表示体积 j== m的情况下的最优解
+*/
+
+
