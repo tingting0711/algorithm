@@ -179,8 +179,37 @@ int main()
 
 > 二维费用的背包问题
 
-```
+物品需考虑体积与重量这两属性
 
+f\[ i ]\[ j ]表示体积为 i，重量为 j 的背包问题
+
+```
+#include<iostream>
+#include<algorithm>
+using namespace std;
+const int N = 110;
+
+int n, v, m;
+int f[N][N];
+
+int main()
+{
+		cin>>n>>v>>m;
+		for(int i = 1; i <= n; i++)
+		{
+				int a, b, c;
+				cin>>a>>b>>c;
+				for(int j = v; j >= a; j--)
+				{
+						for(int k = m; k >= b; k --)
+						{
+								f[j][k] = max(f[j][k], f[j - a][k - b] + c);
+						}
+				}
+		}
+		cout<<f[v][m]<<endl;
+		return 0;
+}
 ```
 
 

@@ -35,23 +35,34 @@
 
 
 /*
-解法1：
-time : 
-space : 
+解法1
+time : O(N*V*M) = 10^7
+space : O(V*M) = 10^4
 */
 
+#include<iostream>
+#include<algorithm>
+using namespace std;
 
+const int N = 110;
 
-/*
-解法2：
-time : 
-space : 
-*/
-
-
-
-/*
-解法3：
-time : 
-space : 
-*/
+int n, v, m;
+int f[N][N];
+int main()
+{
+    cin>>n>>v>>m;
+    for(int i = 1; i <= n; i++)
+    {
+        int a, b, c;
+        cin>>a>>b>>c;
+        for(int j = v; j >= a; j--)
+        {
+            for(int k = m; k >= b; k --)
+            {
+                f[j][k] = max(f[j][k], f[j - a][k - b] + c);
+            }
+        }
+    }
+    cout<<f[v][m]<<endl;
+    return 0;
+}
