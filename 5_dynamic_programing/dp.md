@@ -2,6 +2,8 @@
 
 ## 背包问题
 
+先循环物品，再循环体积，再循环决策
+
 > 0 1 背包
 
 每件物品最多只用一次
@@ -216,24 +218,79 @@ int main()
 
 > 背包问题求方案数
 
-```
+注意此时方案应为体积恰好为（而非小等于）j 。
 
+```
+#include<iostream>
+#include<algorithm>
+using namespace std;
+const int N = 1010;
+int f[N], g[N];
+int INF = 1000000, mood = 1e9 + 9;
+
+int main()
+{
+    int n, m;
+    scanf("%d%d", &n, &m);
+    g[0] = 1;
+    for(int i = 1; i <= m; i++)f[i] = -INF;
+    for(int i = 1; i <= n; i++)
+    {
+        int a, b;
+        scanf("%d%d", &a, &b);
+        for(int j = m; j >= a; j--)
+        {
+            int s = 0;
+            int tmp = max(f[j], f[j - a] + b);
+            if(tmp == f[j])
+            {
+                s += g[j];
+                s %= mood;
+            }
+            if(tmp == f[j - a] + b)
+            {
+                s += g[j - a];
+                s %= mood;
+            }
+            f[j] = tmp;
+            g[j] = s;
+            
+        }
+    }
+    int maxw = 0;
+    for(int i = 0; i <= m; i++)maxw = max(maxw, f[i]);
+    int res = 0;
+    for(int i = 0; i<= m; i++)
+    {
+        if(f[i] == maxw)
+        {
+            res += g[i];
+            if(res >= mood)res %= mood;
+        }
+    }
+    cout<<res<<endl;
+    return 0;
+}
 ```
 
 
 
 > 背包物品方案
 
-```
+由于需要字典序排序，所以遍历物品时，从后往前，输出物品时从前完后
 
+```
+来日再会！
 ```
 
 
 
 > 有依赖的背包问题
 
-```
+f\[ i ]\[ j ]表示选择节点 i，体积为 j 的背包问题
 
+```
+有点难，下次再会！
 ```
 
 
@@ -408,5 +465,70 @@ int main()
 ## 状态压缩DP
 
 ## 树形DP
+
+> 没有上司的舞会
+
+```
+#include<iostream>
+#include<algorithm>
+using namespace std;
+const int N = 6010;
+int n;
+int happy[N];
+int h[N], e[N], ne[N], idx;
+int f[N][2];
+bool has_father[N];
+
+void add(int a, int b)
+{
+		e[idx] = b, ne[idx] = h[a], h[a] = idx ++;
+}
+void dfs(int u)
+{
+		f[u][1] = happy[u];
+		for(int i = h[u]; i != -1; i = ne[i])
+		{
+				int j = e[i];
+				dfs(j);
+				f[u][0] += max(f[j][0], f[j][1]);
+				f[u][1] += f[j][0];
+		}
+}
+int main()
+{
+		scanf("%d", &n);
+		for(int i = 1;i <= n; i++)scanf("%d", &happy[i]);
+		memset(h, -1, sizeof h);
+		for(int i = 0; i < n - 1; i++)
+		{
+				int a, b;
+				scanf("%d%d", &a, &b);
+				has_father[a] = true;
+				add(b, a);
+		}
+		int root = 1;
+		while(has_father[root])root ++;
+		dfs(root);
+		printf("%d\n", max(f[root][0], f[root][1]));
+		return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+
 
 ##记忆化搜索

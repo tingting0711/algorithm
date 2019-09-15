@@ -35,22 +35,57 @@
 
 /*
 解法1：
-time : 
-space : 
+time : O(N*V) = 10^6
+space : O(N)
 */
 
+#include<iostream>
+#include<algorithm>
+using namespace std;
+const int N = 1010;
+int f[N], g[N];
+int INF = 1000000, mood = 1e9 + 9;
 
-
-/*
-解法2：
-time : 
-space : 
-*/
-
-
-
-/*
-解法3：
-time : 
-space : 
-*/
+int main()
+{
+    int n, m;
+    scanf("%d%d", &n, &m);
+    g[0] = 1;
+    for(int i = 1; i <= m; i++)f[i] = -INF;
+    for(int i = 1; i <= n; i++)
+    {
+        int a, b;
+        scanf("%d%d", &a, &b);
+        for(int j = m; j >= a; j--)
+        {
+            int s = 0;
+            int tmp = max(f[j], f[j - a] + b);
+            if(tmp == f[j])
+            {
+                s += g[j];
+                s %= mood;
+            }
+            if(tmp == f[j - a] + b)
+            {
+                s += g[j - a];
+                s %= mood;
+            }
+            f[j] = tmp;
+            g[j] = s;
+            
+        }
+    }
+    int maxw = 0;
+    for(int i = 0; i <= m; i++)maxw = max(maxw, f[i]);
+    int res = 0;
+    for(int i = 0; i<= m; i++)
+    {
+        if(f[i] == maxw)
+        {
+            res += g[i];
+            if(res >= mood)res %= mood;
+        }
+    }
+    cout<<res<<endl;
+    return 0;
+}
