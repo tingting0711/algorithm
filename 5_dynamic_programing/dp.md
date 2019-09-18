@@ -367,7 +367,35 @@ int main()
 > 最长上升子序列2
 
 ```
-
+#include<iostream>
+#include<algorithm>
+#include<string.h>
+using namespace std;
+const int N = 1e5, INF = 2e9;
+int f[N], a[N];
+int main()
+{
+    int n;
+    cin>>n;
+    for(int i = 0; i < n; i++)scanf("%d", &a[i]);
+    f[0] = -INF;
+    int len = 0;
+    for(int i = 0; i < n; i++)
+    {
+        int l = 0, r = len;
+        while(l < r)
+        {
+            int mid = l + r + 1 >> 1;
+            if(f[mid] < a[i])l = mid;
+            else r = mid - 1;
+        }
+        if(!f[r + 1])f[r + 1] = a[i];
+        else f[r + 1] = min(f[r + 1], a[i]);
+        len = max(len, r + 1);
+    }
+    cout<<len<<endl;
+    return 0;
+}
 ```
 
 
@@ -405,7 +433,34 @@ int main()
 > 最短编辑距离
 
 ```
-
+#include<iostream>
+#include<algorithm>
+#include<string.h>
+using namespace std;
+const int N = 1010;
+char a[N], b[N];
+int f[N][N];
+int main()
+{
+    int n, m;
+    scanf("%d%s", &n, a + 1);
+    scanf("%d%s", &m, b + 1);
+    
+    for(int i = 0; i <= m; i++)f[0][i] = i; 
+    for(int i = 0; i <= n; i++)f[i][0] = i; 
+    
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= m; j++)
+        {
+            f[i][j] = min(f[i][j - 1] + 1, f[i - 1][j] + 1);
+            if(a[i] == b [j])f[i][j] = min(f[i][j], f[i - 1][j - 1]);
+            else f[i][j] = min(f[i][j], f[i - 1][j - 1] + 1);
+        }
+    }
+    cout<<f[n][m]<<endl;
+    return 0;
+}
 ```
 
 
