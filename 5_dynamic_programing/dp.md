@@ -88,6 +88,8 @@ for(int i = 1; i <= n; i++)
 
 每个物品有s[i]个
 
+![多重背包](./img/多重背包.png)
+
 ```
 #朴素版本
 #include<iostream>
@@ -142,6 +144,9 @@ int main()
 		cout<<f[m]<<endl;
 		return 0;
 }
+
+#单调队列优化
+#
 
 ```
 
