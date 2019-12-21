@@ -1,76 +1,59 @@
-# Vector使用说明
+# Deque使用说明
 
 > 特性
 
-- 顺序序列
-- 动态数组
+- 双端队列
+- 头尾插入元素十分迅速， 中间插入较慢（移动其他元素）
+- https://www.cnblogs.com/linuxAndMcu/p/10260124.html
 
 > 头文件 && 命名空间
 
 ```c
-#include<vector>
-using std::vector;
+#include<deque>
+using std::deque;
 ```
 
 > 定义与初始化
 
 ```
-vector<type> v1;               // v1保存类型为type的对象，v1为空
+deque<type> v1;               // v1保存类型为type的对象，v1为空
 
-vector<type> v2(size);         // v2保存类型为type，容量为size的对象
+deque<type> v2(size);         // v2保存类型为type，容量为size的对象
 
-vector<type> v3(size,value);   // v3保存类型为type，容量为size，初始值为value的对象
+deque<type> v3(size,value);   // v3保存类型为type，容量为size，初始值为value的对象
 
-vector<type> v4(myvector);     // v4是myvector的一个副本
+deque<type> v4(mydeque);     // v4是myvector的一个副本
 
-vector<type> v5(first,last);   // 用迭代器first和last之间的元素创建v5
+deque<type> v5(first,last);   // 用迭代器first和last之间的元素创建v5
 ```
 
 ```
 eg:
-vector<int> v1;               
-vector<int> v2(10);
-vector<int> v3(10, 0);
-vector<int> v4(v3);
-vector<int> v5(arr+1, arr+5);  //int arr[5] = {1,2,3,4,5,6,7,8,9};
+deque<int> v1;               
+deque<int> v2(10);
+deque<int> v3(10, 0);
+deque<int> v4(v3);
+deque<int> v5(arr+1, arr+5);  //int arr[5] = {1,2,3,4,5,6,7,8,9};
 ```
 
 > 增加
 
-1. void push_back(const T& x) : 向量尾部增加一个元素X
+0. void push_front(const T& x):向量头部增加一个元素X
 
-   ``` 
-   int x = 1; 
-   vector<int> v;
-   v.push_back(x);
-   ```
+1. void push_back(const T& x) : 向量尾部增加一个元素X
 
 2. iterator insert(iterator it,const T& x) : 向量中迭代器指向元素前增加一个元素x
 
-   ```
-   int x = 1;
-   vector<int> v;
-   vector<int>::iterator it;
-   it = v.begin();
-   v.insert(it, x);
-   ```
 
 3. iterator insert(iterator it,int n,const T& x) : 向量中迭代器指向元素前增加n个相同的元素x
-
-   ```
-   int x = 1;
-   vector<int> v;
-   vector<int>::iterator it;
-   it = v.begin();
-   v.insert(it, 3, x);
-   ```
 
 > 删除
 
 1. iterator erase(iterator it) : 删除向量中迭代器指向元素
 2. iterator erase(iterator first,iterator last) : 删除向量中[first,last)中元素
 3. void pop_back() : 删除向量中最后一个元素
-4. void clear() : 清空向量中所有元素
+4. void pop_front() : 删除向量中第一个元素
+5. void clear() : 清空向量中所有元素
 
 > 遍历
 
