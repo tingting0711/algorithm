@@ -242,6 +242,7 @@ int main()
 
 # Trie
 
+- 数组模拟指针
 - 高效的存储和查找字符串
 - 集合的数据结构
 - 字母种类较少，一般26或者54
@@ -347,6 +348,7 @@ int main()
 
 #堆
 
+- priority_queue
 - 完全二叉树
 - 可以插入数                      heap[ ++size] = x; up(size);
 - 可以求最小值                  heap[1];
@@ -510,7 +512,7 @@ int main()
 - P = 131 或13331
 - Q = 2<sup>64</sup>
 
-```
+```c++
 #include<iostream>
 using namespace std;
 typedef unsigned long long ULL;
@@ -563,7 +565,7 @@ int main()
 
 ## vector
 
-```
+```c++
 #include<cstdio>
 #include<cstring>
 #include<iostream>
@@ -601,7 +603,7 @@ int main()
 
 ## pair
 
-```
+```c++
 #include<cstdio>
 #include<cstring>
 #include<iostream>
@@ -631,7 +633,7 @@ int main()
 
 ## string
 
-```
+```c++
 #include<cstdio>
 #include<cstring>
 #include<iostream>
@@ -651,13 +653,13 @@ int main()
 	a.empty();
 	a.clear();
 	a.substr(1, 2);a.substr(起始下表, 长度);
-	a.c_str();
+	a.c_str();返回起始地址（用于pritf("%s", s.c_str())）
 }
 ```
 
 ## queue
 
-```
+```c++
 #include<cstdio>
 #include<cstring>
 #include<iostream>
@@ -671,12 +673,13 @@ int main()
 {
 	queue<int>q;
 	#基本函数， 无clear 
-	q.size()
+	q.size();
+	q.empty();
 	q.push();
 	q.front();
-	q.back()
-	q.pop()
-	q = queue<int>();
+	q.back();
+	q.pop();
+	q = queue<int>();//重新构造
 }
 ```
 
@@ -684,7 +687,7 @@ int main()
 
 ## priority_queue
 
-```
+```c++
 #include<cstdio>
 #include<cstring>
 #include<iostream>
@@ -714,7 +717,7 @@ int main()
 
 ## stack
 
-```
+```c++
 #include<cstdio>
 #include<cstring>
 #include<iostream>
@@ -741,7 +744,7 @@ int main()
 
 ## deque
 
-```
+```c++
 #include<cstdio>
 #include<cstring>
 #include<iostream>
@@ -776,7 +779,7 @@ int main()
 
 ## set, multiset
 
-```
+```c++
 #include<cstdio>
 #include<cstring>
 #include<iostream>
@@ -786,16 +789,18 @@ using namespace std;
 
 int main()
 {
-	#set不重复，multiset可重复
+	#set不重复，multiset可重复, 
 	size();
 	empty();
 	clear();
-	begin()/end(); ++, -- O(logN)
+	begin()/end(); ++, -- （前驱、后继）O(logN)
 	
-	insert();    O(n);
+	# O(logN);
+	insert(); 
 	find();查找某个数，不存在则返回end()迭代器
 	count(); 每个数的个数
-	erase();1.输入是一个数x，则删除多x O(k + logN); 2.输入是迭代器，删除这个迭代器
+	erase();1.输入是一个数x，则删除所有x O(k + logN), k是x的个数
+	        2.输入是迭代器，删除这个迭代器
 	lower_bound();返回大于等于x的最小数的迭代器，不存在返回end()
 	upper_bound();返回大于x大的最小数的迭代器，不存在返回end()
 	
@@ -806,7 +811,7 @@ int main()
 
 ## map， multimap
 
-```
+```c++
 #include<cstdio>
 #include<cstring>
 #include<iostream>
@@ -848,7 +853,7 @@ https://blog.csdn.net/u012530451/article/details/53228098
 
 省内存，省8倍空间
 
-```
+```c++
 #include<cstdio>
 #include<cstring>
 #include<iostream>
@@ -862,7 +867,7 @@ int main()
 	~s, &, |, ^, >>, <<
 	==， ！=
 	[]
-	cont()返回有多少个1
+	count()返回有多少个1
 	any()判断是否至少有1个1
 	none()判断是否全为0
 	
@@ -873,15 +878,3 @@ int main()
 	flip(k)取反第k位
 }
 ```
-
-
-
-# string
-
-blog : https://blog.csdn.net/cxh342968816/article/details/6627768
-
-substr()
-
-find()
-
-atoi(string.c_str())
