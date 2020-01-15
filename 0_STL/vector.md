@@ -4,6 +4,7 @@
 
 - 顺序序列
 - 动态数组
+- https://zhuanlan.zhihu.com/p/102164995
 
 > 头文件 && 命名空间
 
@@ -88,3 +89,5 @@ vector<int> v5(arr+1, arr+5);  //int arr[5] = {1,2,3,4,5,6,7,8,9};
 3. =, ==, !=, <, >, <=, >=  : 保持原有含义
 4. reverse(v.begin(), v.end()) : 翻转对象
 5. v1.swap(v2) : 交换两向量，v1与v2类型须一致
+6. lower_bound( begin,end,num)：从数组的begin位置到end-1位置二分查找第一个**>=**num的数字，找到返回该数字的地址
+7. upper_bound( begin,end,num)：从数组的begin位置到end-1位置二分查找第一个>num的数字，找到返回该数字的地址
