@@ -1,90 +1,122 @@
-# Vector使用说明
+# String使用说明
 
-> 特性
+> 参考资料
 
-- 顺序序列
-- 动态数组
+- https://www.renfei.org/blog/introduction-to-cpp-string.html
 
 > 头文件 && 命名空间
 
 ```c
-#include<vector>
-using std::vector;
+#include<string>
 ```
 
 > 定义与初始化
 
 ```
-vector<type> v1;               // v1保存类型为type的对象，v1为空
-
-vector<type> v2(size);         // v2保存类型为type，容量为size的对象
-
-vector<type> v3(size,value);   // v3保存类型为type，容量为size，初始值为value的对象
-
-vector<type> v4(myvector);     // v4是myvector的一个副本
-
-vector<type> v5(first,last);   // 用迭代器first和last之间的元素创建v5
+string str1;
 ```
 
+
+
+> 运算符重载
+
+1. 连接字符串： \+ , += 
+
+``` c++
+//需保证两个操作数至少有一个是string类型
+"app" + "lication" //不合法
 ```
-eg:
-vector<int> v1;               
-vector<int> v2(10);
-vector<int> v3(10, 0);
-vector<int> v4(v3);
-vector<int> v5(arr+1, arr+5);  //int arr[5] = {1,2,3,4,5,6,7,8,9};
+
+> 查找
+
+```c++
+string str;
+cin >> str;
+
+str.find("ab");//返回字符串 ab 在 str 的位置
+str.find("ab", 2);//在 str[2]~str[n-1] 范围内查找并返回字符串 ab 在 str 的位置
+str.rfind("ab", 2);//在 str[0]~str[2] 范围内查找并返回字符串 ab 在 str 的位置
+
+//first 系列函数
+str.find_first_of("apple");//返回 apple 中任何一个字符首次在 str 中出现的位置
+str.find_first_of("apple", 2);//返回 apple 中任何一个字符首次在 str[2]~str[n-1] 范围中出现的位置
+str.find_first_not_of("apple");//返回除 apple 以外的任何一个字符在 str 中首次出现的位置
+str.find_first_not_of("apple", 2);//返回除 apple 以外的任何一个字符在 str[2]~str[n-1] 范围中首次出现的位置
+
+//last 系列函数
+str.find_last_of("apple");//返回 apple 中任何一个字符最后一次在 str 中出现的位置
+str.find_last_of("apple", 2);//返回 apple 中任何一个字符最后一次在 str[0]~str[2] 范围中出现的位置
+str.find_last_not_of("apple");//返回除 apple 以外的任何一个字符在 str 中最后一次出现的位置
+str.find_last_not_of("apple", 2);//返回除 apple 以外的任何一个字符在 str[0]~str[2] 范围中最后一次出现的位置
+
+//以上函数如果没有找到，均返回string::npos
+cout << string::npos;
 ```
 
-> 增加
 
-1. void push_back(const T& x) : 向量尾部增加一个元素X
 
-   ``` 
-   int x = 1; 
-   vector<int> v;
-   v.push_back(x);
-   ```
+> 字串
 
-2. iterator insert(iterator it,const T& x) : 向量中迭代器指向元素前增加一个元素x
+```c++
+str.substr(3); //返回 [3] 及以后的子串
+str.substr(2, 4); //返回 str[2]~str[2+(4-1)] 子串(即从[2]开始4个字符组成的字符串)
+```
 
-   ```
-   int x = 1;
-   vector<int> v;
-   vector<int>::iterator it;
-   it = v.begin();
-   v.insert(it, x);
-   ```
 
-3. iterator insert(iterator it,int n,const T& x) : 向量中迭代器指向元素前增加n个相同的元素x
 
-   ```
-   int x = 1;
-   vector<int> v;
-   vector<int>::iterator it;
-   it = v.begin();
-   v.insert(it, 3, x);
-   ```
+> 替换
+
+```c++
+str.replace(2, 4, "sz");//返回把 [2]~[2+(4-1)] 的内容替换为 "sz" 后的新字符串
+str.replace(2, 4, "abcd", 3);//返回把 [2]~[2+(4-1)] 的内容替换为 "abcd" 的前3个字符后的新字符串
+```
+
+
+
+> 插入
+
+```c++
+str.insert(2, "sz");//从 [2] 位置开始添加字符串 "sz"，并返回形成的新字符串
+str.insert(2, "abcd", 3);//从 [2] 位置开始添加字符串 "abcd" 的前 3 个字符，并返回形成的新字符串
+str.insert(2, "abcd", 1, 3);//从 [2] 位置开始添加字符串 "abcd" 的前 [2]~[2+(3-1)] 个字符，并返回形成的新字符串
+```
+
+
+
+> 追加
+
+```c++
+str += "aaa";
+str.push_back('a');//在 str 末尾添加字符'a'
+str.append("abc");//在 str 末尾添加字符串"abc"
+```
+
+
 
 > 删除
 
-1. iterator erase(iterator it) : 删除向量中迭代器指向元素
-2. iterator erase(iterator first,iterator last) : 删除向量中[first,last)中元素
-3. void pop_back() : 删除向量中最后一个元素
-4. void clear() : 清空向量中所有元素
+```c++
+str.erase(3);//删除 [3] 及以后的字符，并返回新字符串
+str.erase(3, 5);//删除从 [3] 开始的 5 个字符，并返回新字符串
+```
 
-> 遍历
 
-1. v.begin()
-2. v.end()
-3. v[i] : 返回v中位置为i的元素
-4. v.at[i] : 返回位置为 i 的元素，有越界检查
-5. v. front() : 返回向量中第一个元素的引用
-6. v.back() : 返回向量中最后一个元素的引用
 
-> 其他
+> 交换
 
-1. v.empty() : 若为空只返回true，否则返回false
-2. v.size() : 返回对象中元素的总个数
-3. =, ==, !=, <, >, <=, >=  : 保持原有含义
-4. reverse(v.begin(), v.end()) : 翻转对象
-5. v1.swap(v2) : 交换两向量，v1与v2类型须一致
+```c++
+str1.swap(str2);//把 str1 与 str2 交换
+```
+
+
+
+>其他
+
+```c++
+str.size();//返回字符串长度
+str.length();//返回字符串长度
+str.empty();//检查 str 是否为空，为空返回 1，否则返回 0
+str[n];//存取 str 第 n + 1 个字符
+str.at(n);//存取 str 第 n + 1 个字符（如果溢出会抛出异常
+```
+
