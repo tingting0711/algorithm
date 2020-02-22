@@ -49,7 +49,7 @@
 
 ![bubbleSort](/Users/more/Desktop/19fall/algorithm2/1.%20%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/0x05%E6%8E%92%E5%BA%8F/img/bubbleSort.gif)
 
-```
+```c
 #最初版O(N2)
 void bubbleSort(verstor<int> &q)
 {
@@ -77,7 +77,7 @@ void bubbleSort(verstor<int> &q)
 
 ![selectionSort](/Users/more/Desktop/19fall/algorithm2/1.%20%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/0x05%E6%8E%92%E5%BA%8F/img/selectionSort.gif)
 
-```
+```c
 void selectionSort(verstor<int> &q)
 {
 		for(int i = 0; i < q.size(); i++)
@@ -112,7 +112,7 @@ void insertionSort(verstor<int> &q)
 
 描述：
 
-![mergeSort](/Users/more/Desktop/19fall/algorithm2/1.%20%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/0x05%E6%8E%92%E5%BA%8F/img/mergeSort.gif)
+![mergeSort](./img/mergeSort.gif)
 
 - top down
   - array     O(N + logN)
@@ -152,7 +152,7 @@ void mergeSort(vector<int> &q, int l, int r)
 
 描述：分而治之
 
-![quickSort](/Users/more/Desktop/19fall/algorithm2/1.%20%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95/0x05%E6%8E%92%E5%BA%8F/img/quickSort.gif)
+![quickSort](./img/quickSort.gif)
 
 ```
 void quickSort(vector<int>&q, int l, int r)
